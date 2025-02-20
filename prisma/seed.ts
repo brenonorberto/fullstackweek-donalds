@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const { PrismaClient } = require("@prisma/client")
+const { PrismaClient } = require("@prisma/client");
 
-const prismaClient = new PrismaClient()
+const prismaClient = new PrismaClient();
 
 const main = async () => {
   await prismaClient.$transaction(async (tx: any) => {
-    await tx.restaurant.deleteMany()
+    await tx.restaurant.deleteMany();
     const restaurant = await tx.restaurant.create({
       data: {
         name: "FSW Donalds",
@@ -15,15 +15,15 @@ const main = async () => {
         avatarImageUrl:
           "https://u9a6wmr3as.ufs.sh/f/jppBrbk0cChQvcNP9rHlEJu1vCY5kLqzjf29HKaeN78Z6pRy",
         coverImageUrl:
-          "https://u9a6wmr3as.ufs.sh/f/jppBrbk0cChQU3JZGQeTmvPeJLoyOjzNsMqFdxUI423nBl6b",
+          "https://u9a6wmr3as.ufs.sh/f/jppBrbk0cChQac8bHYlkBUjlHSKiuseLm2hIFzVY0OtxEPnw",
       },
-    })
+    });
     const combosCategory = await tx.menuCategory.create({
       data: {
         name: "Combos",
         restaurantId: restaurant.id,
       },
-    })
+    });
     await tx.product.createMany({
       data: [
         {
@@ -102,13 +102,13 @@ const main = async () => {
           ],
         },
       ],
-    })
+    });
     const hamburguersCategory = await tx.menuCategory.create({
       data: {
         name: "Lanches",
         restaurantId: restaurant.id,
       },
-    })
+    });
     await tx.product.createMany({
       data: [
         {
@@ -187,13 +187,13 @@ const main = async () => {
           restaurantId: restaurant.id,
         },
       ],
-    })
+    });
     const frenchFriesCategory = await tx.menuCategory.create({
       data: {
         name: "Fritas",
         restaurantId: restaurant.id,
       },
-    })
+    });
     await tx.product.createMany({
       data: [
         {
@@ -229,13 +229,13 @@ const main = async () => {
           restaurantId: restaurant.id,
         },
       ],
-    })
+    });
     const drinksCategory = await tx.menuCategory.create({
       data: {
         name: "Bebidas",
         restaurantId: restaurant.id,
       },
-    })
+    });
     await tx.product.createMany({
       data: [
         {
@@ -269,13 +269,13 @@ const main = async () => {
           restaurantId: restaurant.id,
         },
       ],
-    })
+    });
     const desertsCategory = await tx.menuCategory.create({
       data: {
         name: "Sobremesas",
         restaurantId: restaurant.id,
       },
-    })
+    });
     await tx.product.createMany({
       data: [
         {
@@ -309,14 +309,14 @@ const main = async () => {
           restaurantId: restaurant.id,
         },
       ],
-    })
-  })
-}
+    });
+  });
+};
 
 main()
   .catch((e) => {
-    throw e
+    throw e;
   })
   .finally(async () => {
-    await prismaClient.$disconnect()
-  })
+    await prismaClient.$disconnect();
+  });
